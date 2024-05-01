@@ -2,33 +2,44 @@ import throttle from 'lodash/throttle';
 
 export default class FullPageScroll {
   constructor() {
-    this.THROTTLE_TIMEOUT = 2000;
+    this.THROTTLE_TIMEOUT = 1000;
+    this.scrollFlag = true;
+    this.timeout = null;
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
 
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
-    this.onUrlHashChengedHandler = this.onUrlHashChenged.bind(this);
+    this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
 
   init() {
-    document.addEventListener(`wheel`, throttle(this.onScrollHandler, this.THROTTLE_TIMEOUT));
+    document.addEventListener(`wheel`, throttle(this.onScrollHandler, this.THROTTLE_TIMEOUT, {trailing: true}));
     window.addEventListener(`popstate`, this.onUrlHashChengedHandler);
 
-    this.onUrlHashChenged();
-    this.changePageDisplay();
+    this.onUrlHashChanged();
   }
 
   onScroll(evt) {
-    const currentPosition = this.activeScreen;
-    this.reCalculateActiveScreenPosition(evt.deltaY);
-    if (currentPosition !== this.activeScreen) {
-      this.changePageDisplay();
+    if (this.scrollFlag) {
+      this.reCalculateActiveScreenPosition(evt.deltaY);
+      const currentPosition = this.activeScreen;
+      if (currentPosition !== this.activeScreen) {
+        this.changePageDisplay();
+      }
     }
+    this.scrollFlag = false;
+    if (this.timeout !== null) {
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(() => {
+      this.timeout = null;
+      this.scrollFlag = true;
+    }, this.THROTTLE_TIMEOUT);
   }
 
-  onUrlHashChenged() {
+  onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
@@ -46,7 +57,9 @@ export default class FullPageScroll {
       screen.classList.remove(`active`);
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
-    this.screenElements[this.activeScreen].classList.add(`active`);
+    setTimeout(() => {
+      this.screenElements[this.activeScreen].classList.add(`active`);
+    }, 100);
   }
 
   changeActiveMenuItem() {
