@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssoWebpackPlugin = require('csso-webpack-plugin').default;
+// const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -95,9 +95,9 @@ module.exports = {
       filename: 'css/style.min.css',
       chunkFilename: "[id].css"
     }),
-    new CssoWebpackPlugin({
-      pluginOutputPostfix: 'min'
-    }),
+    // new CssoWebpackPlugin({
+    //   pluginOutputPostfix: 'min'
+    // }),
     new CopyPlugin([
       {
         from: "source/fonts/**/*.{woff,woff2}",
