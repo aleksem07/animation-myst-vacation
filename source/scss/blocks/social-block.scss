@@ -3,6 +3,7 @@
 
   &:hover {
     .social-block__list {
+
       opacity: 1;
       pointer-events: auto;
     }
@@ -89,6 +90,7 @@
   margin-top: 1.5rem;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease-in;
 
   @media (min-width: $stop-scaling) {
     margin-top: 15px;
@@ -168,6 +170,7 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+  transition: all 0.3s ease-in;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
