@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import fillBlock from '../fill-block';
 
 export default class FullPageScroll {
   constructor() {
@@ -67,6 +68,7 @@ export default class FullPageScroll {
     if (activeItem) {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
       activeItem.classList.add(`active`);
+      fillBlock();
     }
   }
 

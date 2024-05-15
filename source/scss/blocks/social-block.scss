@@ -132,6 +132,10 @@
   &:hover {
     opacity: 1;
     pointer-events: auto;
+
+    & li {
+      animation: fadeIn 1s forwards;
+    }
   }
 
   &:focus-within {

@@ -5,6 +5,12 @@
   right: 0;
   padding: 2.7rem 0;
   z-index: 10;
+  transform: translateY(-60px);
+  transition: transform 0.8s cubic-bezier(0.5, 0.8, 0.5, 0.90);
+
+  .loaded & {
+    transform: translateY(0px);
+  }
 
   @media (min-width: $stop-scaling) {
     padding: 27px 0;
