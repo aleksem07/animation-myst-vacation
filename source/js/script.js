@@ -11,6 +11,7 @@ import FullPageScroll from './modules/full-page-scroll';
 import domContentLoaded from './dom-content-loaded.js';
 import fillBlock from './fill-block.js';
 import endAnimationRulesPage from './end-animation-rules-page.js';
+import textWrapperAnima from './text-wrapper-anima.js';
 
 // init modules
 mobileHeight();

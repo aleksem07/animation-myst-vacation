@@ -34,21 +34,32 @@
   letter-spacing: -0.04em;
 
   @media (min-width: $stop-scaling) {
-    max-width: 990px;
+    max-width: 1100px;
     font-size: 120px;
   }
 
+  @media (max-width: $stop-scaling - 1px) {
+    max-width: 80%;
+  }
+
   @media (max-width: $tablet) and (orientation: portrait) {
-    max-width: 100%;
+    max-width: 80%;
     font-size: 3.6rem;
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
+    max-width: 91%;
     font-size: 10rem;
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
+    max-width: 95%;
     font-size: 5rem;
+
+  }
+
+  @media (max-width: $mobile) and (orientation: portrait) {
+    max-width: 100%;
   }
 }
 
